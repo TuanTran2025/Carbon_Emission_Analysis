@@ -11,7 +11,7 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ![image](https://github.com/user-attachments/assets/f8a3a422-d8f2-406c-bca7-acdb8a43f003)
 
 ### 1.2 Data structure
-Table'product_emissions'
+* Table 'product_emissions'
 ```sql
 SELECT * FROM product_emissions LIMIT 10
 ```
@@ -27,6 +27,11 @@ SELECT * FROM product_emissions LIMIT 10
 |10418-1-2013|84|9|19|2013|Portland Cement|1000.0|1102|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|
 |10661-10-2014|85|28|11|2014|Regular Straight 505® Jeans – Steel (Water<Less™)|0.7665|15|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|
 |10661-10-2015|85|28|6|2015|Regular Straight 505® Jeans – Steel (Water<Less™)|0.7665|15|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|
+
+* Table 'industry_groups'
+```sq'
+
+```
 
 ## 2. Data Exploration
 ### 2.1. Data duplication
@@ -97,4 +102,31 @@ LIMIT 10
 |Mercedes-Benz S-Class (S 500)|85000.00|
 |Mercedes-Benz SL (SL 350)|72000.00|
 
-Insided comments:
+* Insided comments: The products with high carbon emissions are wind turbines with 2 or 5 megawats and then luxury cars such as Land Cruiser Prado, Dyna trucks, Toyoace.IMV, Mercedes-Benz models GLE, S-Class and SL.
+
+### 3.2. What are the industry groups of these products?
+```sql
+SELECT product_name,
+		industry_groups.industry_group,
+		ROUND(AVG(carbon_footprint_pcf),2) AS 'Average PCF'
+FROM product_emissions
+	JOIN industry_groups ON industry_group_id = industry_groups.id
+GROUP BY
+	product_name, 
+    product_emissions.product_name, 
+    industry_groups.industry_group
+ORDER BY carbon_footprint_pcf DESC
+LIMIT 10
+```
+|product_name|industry_group|Average PCF|
+|------------|--------------|-----------|
+|Wind Turbine G128 5 Megawats|Electrical Equipment and Machinery|3718044.00|
+|Wind Turbine G132 5 Megawats|Electrical Equipment and Machinery|3276187.00|
+|Wind Turbine G114 2 Megawats|Electrical Equipment and Machinery|1532608.00|
+|Wind Turbine G90 2 Megawats|Electrical Equipment and Machinery|1251625.00|
+|Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.|Automobiles & Components|191687.00|
+|Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall|Materials|167000.00|
+|TCDE|Materials|99075.00|
+|Mercedes-Benz GLE (GLE 500 4MATIC)|Automobiles & Components|91000.00|
+|Mercedes-Benz S-Class (S 500)|Automobiles & Components|85000.00|
+|Mercedes-Benz SL (SL 350)|Automobiles & Components|72000.00|
