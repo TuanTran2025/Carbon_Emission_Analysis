@@ -2,7 +2,7 @@
 
 ## 1. Introduction 
 This report aims to analyze carbon emissions to examine the carbon footprint across various industries. We aim to identify sectors with the highest levels of emissions by analyzing them across countries and years, as well as to uncover trends.
-https://lms.swisscoding.edu.vn/pluginfile.php/19031/mod_label/intro/cover.jpg
+![image](https://github.com/user-attachments/assets/7af77d54-acf7-4fd5-9c52-ff382149971f)
 
 ### 1.1 Data model
 
