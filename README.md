@@ -171,7 +171,7 @@ JOIN companies c ON c.id = pe.company_id
 GROUP BY c.company_name
 ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
 LIMIT 10
---
+```
 |company_name|ROUND(SUM(pe.carbon_footprint_pcf),2)|
 |------------|-------------------------------------|
 |"Gamesa Corporación Tecnológica, S.A."|9778464.00|
