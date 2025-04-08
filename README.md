@@ -102,7 +102,8 @@ LIMIT 10
 |Mercedes-Benz S-Class (S 500)|85000.00|
 |Mercedes-Benz SL (SL 350)|72000.00|
 
-* Insided comments: The products with high carbon emissions are wind turbines with 2 or 5 megawats and then luxury cars such as Land Cruiser Prado, Dyna trucks, Toyoace.IMV, Mercedes-Benz models GLE, S-Class and SL.
+* Insided comments:
+The products with high carbon emissions are wind turbines with 2 or 5 megawats and then luxury cars such as Land Cruiser Prado, Dyna trucks, Toyoace.IMV, Mercedes-Benz models GLE, S-Class and SL.
 
 ### 3.2. What are the industry groups of these products?
 ```sql
@@ -130,3 +131,6 @@ LIMIT 10
 |Mercedes-Benz GLE (GLE 500 4MATIC)|Automobiles & Components|91000.00|
 |Mercedes-Benz S-Class (S 500)|Automobiles & Components|85000.00|
 |Mercedes-Benz SL (SL 350)|Automobiles & Components|72000.00|
+
+* Insided comments:
+The industry groups with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
