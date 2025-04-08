@@ -160,3 +160,50 @@ LIMIT 10
 |Media|23017.00|
 
 * Insided comments:
+The industries with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
+
+### 3.4. What are the companies with the highest contribution to carbon emissions?
+```sql
+SELECT c.company_name,
+	ROUND(SUM(pe.carbon_footprint_pcf),2)
+FROM product_emissions pe 
+JOIN companies c ON c.id = pe.company_id
+GROUP BY c.company_name
+ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
+LIMIT 10
+--
+|company_name|ROUND(SUM(pe.carbon_footprint_pcf),2)|
+|------------|-------------------------------------|
+|"Gamesa Corporación Tecnológica, S.A."|9778464.00|
+|Daimler AG|1594300.00|
+|Volkswagen AG|655960.00|
+|"Mitsubishi Gas Chemical Company, Inc."|212016.00|
+|"Hino Motors, Ltd."|191687.00|
+|Arcelor Mittal|167007.00|
+|Weg S/A|160655.00|
+|General Motors Company|137007.00|
+|"Lexmark International, Inc."|132012.00|
+|"Daikin Industries, Ltd."|105600.00|
+
+### 3.5. What are the countries with the highest contribution to carbon emissions?
+```sql
+ELECT ct.country_name,
+	ROUND(SUM(pe.carbon_footprint_pcf),2)
+FROM product_emissions pe 
+JOIN countries ct ON ct.id = pe.country_id
+GROUP BY ct.country_name
+ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
+LIMIT 10
+```
+|country_name|ROUND(SUM(pe.carbon_footprint_pcf),2)|
+|------------|-------------------------------------|
+|Spain|9786130.00|
+|Germany|2251225.00|
+|Japan|653237.00|
+|USA|518381.00|
+|South Korea|186965.00|
+|Brazil|169337.00|
+|Luxembourg|167007.00|
+|Netherlands|70417.00|
+|Taiwan|62875.00|
+|India|24574.00|
