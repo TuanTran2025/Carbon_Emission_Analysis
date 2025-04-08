@@ -107,16 +107,17 @@ The products with high carbon emissions are wind turbines with 2 or 5 megawats a
 
 ### 3.2. What are the industry groups of these products?
 ```sql
-SELECT product_name,
-		industry_groups.industry_group,
-		ROUND(AVG(carbon_footprint_pcf),2) AS 'Average PCF'
-FROM product_emissions
-	JOIN industry_groups ON industry_group_id = industry_groups.id
+SELECT pe.product_name,
+	ig.industry_group,
+	ROUND(AVG(pe.carbon_footprint_pcf),2) AS 'Average PCF'
+FROM product_emissions pe
+	JOIN industry_groups ig ON pe.industry_group_id = ig.id
 GROUP BY
-	product_name, 
-    product_emissions.product_name, 
-    industry_groups.industry_group
-ORDER BY carbon_footprint_pcf DESC
+    pe.product_name, 
+    pe.product_name, 
+    ig.industry_group
+ORDER BY
+    pe.carbon_footprint_pcf DESC
 LIMIT 10
 ```
 |product_name|industry_group|Average PCF|
@@ -134,3 +135,28 @@ LIMIT 10
 
 * Insided comments:
 The industry groups with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
+
+### 3.3. What are the industries with the highest contribution to carbon emissions?
+```sql
+SELECT ig.industry_group,
+	ROUND(SUM(pe.carbon_footprint_pcf),2)
+FROM product_emissions pe 
+JOIN industry_groups ig ON ig.id = pe.industry_group_id
+GROUP BY pe.industry_group_id
+ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
+LIMIT 10
+```
+|industry_group|ROUND(SUM(pe.carbon_footprint_pcf),2)|
+|--------------|-------------------------------------|
+|Electrical Equipment and Machinery|9801558.00|
+|Automobiles & Components|2582264.00|
+|Materials|577595.00|
+|Technology Hardware & Equipment|363776.00|
+|Capital Goods|258712.00|
+|"Food, Beverage & Tobacco"|111131.00|
+|"Pharmaceuticals, Biotechnology & Life Sciences"|72486.00|
+|Chemicals|62369.00|
+|Software & Services|46544.00|
+|Media|23017.00|
+
+* Insided comments:
