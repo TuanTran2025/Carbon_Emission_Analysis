@@ -301,5 +301,4 @@ ORDER BY
 |Utilities|122.00|0.00|0.00|122.00|0.00|
 
 * From these figures, it can be found that the industry groups with notable decrease in carbon emission over the time, especially the period of years from 2015 to 2017 are the Electrical Equipment & Machinery and then the Automobiles & Components.
-
 ![image](https://github.com/TuanTran2025/Carbon_Emission_Analysis/blob/main/Chart%20of%20Carbon%20Emission.png?raw=true)
