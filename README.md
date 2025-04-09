@@ -265,7 +265,7 @@ ORDER BY
 	'2016 Emission',
 	'2015 Emission',
 	'2014 Emission',
-	'2013 Emission'
+	'2013 Emission';
 ```
 |Industry Group|2013 Emission|2014 Emission|2015 Emission|2016 Emission|2017 Emission|
 |--------------|-------------|-------------|-------------|-------------|-------------|
