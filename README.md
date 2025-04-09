@@ -7,11 +7,10 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
 
 ### 1.1 Data model
 The dataset consists of 4 tables containing information regarding carbon emissions generated during the production of goods.
-
 ![image](https://github.com/user-attachments/assets/f8a3a422-d8f2-406c-bca7-acdb8a43f003)
 
 ### 1.2 Data structure
-* Table 'product_emissions'
+#### 1.2.1 Table 'product_emissions'
 ```sql
 SELECT * FROM product_emissions LIMIT 10
 ```
@@ -28,13 +27,13 @@ SELECT * FROM product_emissions LIMIT 10
 |10661-10-2014|85|28|11|2014|Regular Straight 505® Jeans – Steel (Water<Less™)|0.7665|15|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|
 |10661-10-2015|85|28|6|2015|Regular Straight 505® Jeans – Steel (Water<Less™)|0.7665|15|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|
 
-* Table 'industry_groups'
+#### 1.2.2 Table 'industry_groups'
 ```sq'
 
 ```
 
 ## 2. Data Exploration
-### 2.1. Data duplication
+### 2.1 Data duplication
 ```sql
 SELECT *,
 	count(*) as duplicated_count
@@ -67,7 +66,7 @@ limit 10;
 |10661-1-2014|85|28|11|2014|501® Original Jeans – Dark Stonewash|0.997|16|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|2|
 |10661-1-2015|85|28|6|2015|501® Original Jeans – Dark Stonewash|0.997|16|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|2|
 
-### 2.2. Duplicate result
+### 2.2 Duplicate result
 ```sql
 SELECT COUNT(product_name) as 'Total number of products',
 	COUNT(DISTINCT product_name) as 'Number of unique products'
@@ -79,7 +78,7 @@ FROM product_emissions;
 
 
 ## 3. Data Analysis
-### 3.1. Which products contribute the most to carbon emissions?
+### 3.1 Which products contribute the most to carbon emissions?
 ```sql
 SELECT product_name,
 		ROUND(AVG(carbon_footprint_pcf),2) AS 'Average PCF'
@@ -105,7 +104,7 @@ LIMIT 10
 * Insided comments:
 The products with high carbon emissions are wind turbines with 2 or 5 megawats and then luxury cars such as Land Cruiser Prado, Dyna trucks, Toyoace.IMV, Mercedes-Benz models GLE, S-Class and SL.
 
-### 3.2. What are the industry groups of these products?
+### 3.2 What are the industry groups of these products?
 ```sql
 SELECT pe.product_name,
 	ig.industry_group,
@@ -136,7 +135,7 @@ LIMIT 10
 * Insided comments:
 The industry groups with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
 
-### 3.3. What are the industries with the highest contribution to carbon emissions?
+### 3.3 What are the industries with the highest contribution to carbon emissions?
 ```sql
 SELECT ig.industry_group,
 	ROUND(SUM(pe.carbon_footprint_pcf),2)
@@ -162,7 +161,7 @@ LIMIT 10
 * Insided comments:
 The industries with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
 
-### 3.4. What are the companies with the highest contribution to carbon emissions?
+### 3.4 What are the companies with the highest contribution to carbon emissions?
 ```sql
 SELECT c.company_name,
 	ROUND(SUM(pe.carbon_footprint_pcf),2)
@@ -185,7 +184,7 @@ LIMIT 10
 |"Lexmark International, Inc."|132012.00|
 |"Daikin Industries, Ltd."|105600.00|
 
-### 3.5. What are the countries with the highest contribution to carbon emissions?
+### 3.5 What are the countries with the highest contribution to carbon emissions?
 ```sql
 ELECT ct.country_name,
 	ROUND(SUM(pe.carbon_footprint_pcf),2)
@@ -208,12 +207,12 @@ LIMIT 10
 |Taiwan|62875.00|
 |India|24574.00|
 
-### 3.6. What is the trend of carbon footprints (PCFs) over the years?
+### 3.6 What is the trend of carbon footprints (PCFs) over the years?
 ```sql
 
 ```
 
-### 3.7. Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
+### 3.7 Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
 ```sql
 SELECT
 	ig.industry_group AS 'Industry Group',
