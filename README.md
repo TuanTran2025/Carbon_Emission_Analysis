@@ -300,4 +300,6 @@ ORDER BY
 |Trading Companies & Distributors and Commercial Services & Supplies|0.00|0.00|239.00|0.00|0.00|
 |Utilities|122.00|0.00|0.00|122.00|0.00|
 
-* From these figures, it can be found that the industry groups with notable decrease in carbon emission are the Electrical Equipment & Machinery and then the Automobiles & Components.
+* From these figures, it can be found that the industry groups with notable decrease in carbon emission over the time, especially the period of years from 2015 to 2017 are the Electrical Equipment & Machinery and then the Automobiles & Components.
+
+
