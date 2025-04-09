@@ -169,7 +169,7 @@ GROUP BY pe.industry_group_id
 ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
 LIMIT 10;
 ```
-|industry_group|AS 'Total PCF'|
+|industry_group|Total PCF|
 |--------------|-------------------------------------|
 |Electrical Equipment and Machinery|9801558.00|
 |Automobiles & Components|2582264.00|
@@ -194,7 +194,7 @@ GROUP BY c.company_name
 ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
 LIMIT 10;
 ```
-|company_name|AS 'Total PCF'|
+|company_name|Total PCF|
 |------------|-------------------------------------|
 |"Gamesa Corporación Tecnológica, S.A."|9778464.00|
 |Daimler AG|1594300.00|
@@ -217,7 +217,7 @@ GROUP BY ct.country_name
 ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
 LIMIT 10;
 ```
-|country_name|AS 'Total PCF'|
+|country_name|Total PCF|
 |------------|-------------------------------------|
 |Spain|9786130.00|
 |Germany|2251225.00|
