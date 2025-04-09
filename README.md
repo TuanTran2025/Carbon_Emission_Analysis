@@ -12,7 +12,7 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ### 1.2 Data structure
 #### 1.2.1 Table 'product_emissions'
 ```sql
-SELECT * FROM product_emissions LIMIT 10
+SELECT * FROM product_emissions LIMIT 5;
 ```
 |id|company_id|country_id|industry_group_id|year|product_name|weight_kg|carbon_footprint_pcf|upstream_percent_total_pcf|operations_percent_total_pcf|downstream_percent_total_pcf|
 |--|----------|----------|-----------------|----|------------|---------|--------------------|--------------------------|----------------------------|----------------------------|
@@ -21,16 +21,42 @@ SELECT * FROM product_emissions LIMIT 10
 |10222-1-2013|83|28|8|2013|Office Chair|20.68|73|80.63|17.36|2.01|
 |10261-1-2017|14|16|25|2017|Multifunction Printers|110.0|1488|30.65|5.51|63.84|
 |10261-2-2017|14|16|25|2017|Multifunction Printers|110.0|1818|25.08|4.51|70.41|
-|10261-3-2017|14|16|25|2017|Multifunction Printers|110.0|2274|20.05|3.61|76.34|
-|10324-1-2016|15|16|19|2016|KURALON  fiber|1500.0|10000|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|
-|10418-1-2013|84|9|19|2013|Portland Cement|1000.0|1102|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|
-|10661-10-2014|85|28|11|2014|Regular Straight 505® Jeans – Steel (Water<Less™)|0.7665|15|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|
-|10661-10-2015|85|28|6|2015|Regular Straight 505® Jeans – Steel (Water<Less™)|0.7665|15|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|N/a (product with insufficient stage-level data)|
 
 #### 1.2.2 Table 'industry_groups'
-```sq'
-
+```sql
+SELECT * FROM industry_groups LIMIT 5;
 ```
+|id|industry_group|
+|--|--------------|
+|1|"Consumer Durables, Household and Personal Products"|
+|2|"Food, Beverage & Tobacco"|
+|3|"Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber"|
+|4|"Mining - Iron, Aluminum, Other Metals"|
+|5|"Pharmaceuticals, Biotechnology & Life Sciences"|
+
+#### 1.2.3 Table 'companies'
+```sql
+SELECT * FROM companies LIMIT 5;
+```
+|id|company_name|
+|--|------------|
+|1|"Autodesk, Inc."|
+|2|"Casio Computer Co., Ltd."|
+|3|"Cisco Systems, Inc."|
+|4|"CNX Coal Resources, LP"|
+|5|"Coca-Cola Enterprises, Inc."|
+
+#### 1.2.4 Table 'countries'
+```sql
+SELECT * FROM countries LIMIT 5;
+```
+|id|country_name|
+|--|------------|
+|1|Australia|
+|2|Belgium|
+|3|Brazil|
+|4|Canada|
+|5|Chile|
 
 ## 2. Data Exploration
 ### 2.1 Data duplication
@@ -68,7 +94,7 @@ limit 10;
 
 ### 2.2 Duplicate result
 ```sql
-SELECT COUNT(product_name) as 'Total number of products',
+SELECT	COUNT(product_name) as 'Total number of products',
 	COUNT(DISTINCT product_name) as 'Number of unique products'
 FROM product_emissions;
 ```
@@ -80,14 +106,13 @@ FROM product_emissions;
 ## 3. Data Analysis
 ### 3.1 Which products contribute the most to carbon emissions?
 ```sql
-SELECT product_name,
-		ROUND(AVG(carbon_footprint_pcf),2) AS 'Average PCF'
+SELECT	product_name,
+	ROUND(AVG(carbon_footprint_pcf),2) AS 'Average PCF'
 FROM product_emissions
 GROUP BY product_name
 ORDER BY carbon_footprint_pcf DESC
-LIMIT 10
+LIMIT 10;
 ```
-
 |product_name|Average PCF|
 |------------|-----------|
 |Wind Turbine G128 5 Megawats|3718044.00|
@@ -101,23 +126,22 @@ LIMIT 10
 |Mercedes-Benz S-Class (S 500)|85000.00|
 |Mercedes-Benz SL (SL 350)|72000.00|
 
-* Insided comments:
-The products with high carbon emissions are wind turbines with 2 or 5 megawats and then luxury cars such as Land Cruiser Prado, Dyna trucks, Toyoace.IMV, Mercedes-Benz models GLE, S-Class and SL.
+* The products with high carbon emissions are wind turbines with 2 or 5 megawats and then luxury cars such as Land Cruiser Prado, Dyna trucks, Toyoace.IMV, Mercedes-Benz models GLE, S-Class and SL.
 
 ### 3.2 What are the industry groups of these products?
 ```sql
-SELECT pe.product_name,
+SELECT	pe.product_name,
 	ig.industry_group,
 	ROUND(AVG(pe.carbon_footprint_pcf),2) AS 'Average PCF'
-FROM product_emissions pe
-	JOIN industry_groups ig ON pe.industry_group_id = ig.id
+FROM product_emissions pe JOIN
+     industry_groups ig ON pe.industry_group_id = ig.id
 GROUP BY
-    pe.product_name, 
-    pe.product_name, 
+    pe.product_name,
+    pe.product_name,
     ig.industry_group
 ORDER BY
     pe.carbon_footprint_pcf DESC
-LIMIT 10
+LIMIT 10;
 ```
 |product_name|industry_group|Average PCF|
 |------------|--------------|-----------|
@@ -132,18 +156,17 @@ LIMIT 10
 |Mercedes-Benz S-Class (S 500)|Automobiles & Components|85000.00|
 |Mercedes-Benz SL (SL 350)|Automobiles & Components|72000.00|
 
-* Insided comments:
-The industry groups with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
+* The industry groups with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
 
 ### 3.3 What are the industries with the highest contribution to carbon emissions?
 ```sql
-SELECT ig.industry_group,
+SELECT	ig.industry_group,
 	ROUND(SUM(pe.carbon_footprint_pcf),2)
-FROM product_emissions pe 
-JOIN industry_groups ig ON ig.id = pe.industry_group_id
+FROM product_emissions pe JOIN
+     industry_groups ig ON ig.id = pe.industry_group_id
 GROUP BY pe.industry_group_id
 ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
-LIMIT 10
+LIMIT 10;
 ```
 |industry_group|ROUND(SUM(pe.carbon_footprint_pcf),2)|
 |--------------|-------------------------------------|
@@ -158,18 +181,17 @@ LIMIT 10
 |Software & Services|46544.00|
 |Media|23017.00|
 
-* Insided comments:
-The industries with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
+* The industries with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
 
 ### 3.4 What are the companies with the highest contribution to carbon emissions?
 ```sql
-SELECT c.company_name,
+SELECT	c.company_name,
 	ROUND(SUM(pe.carbon_footprint_pcf),2)
-FROM product_emissions pe 
-JOIN companies c ON c.id = pe.company_id
+FROM product_emissions pe JOIN
+     companies c ON c.id = pe.company_id
 GROUP BY c.company_name
 ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
-LIMIT 10
+LIMIT 10;
 ```
 |company_name|ROUND(SUM(pe.carbon_footprint_pcf),2)|
 |------------|-------------------------------------|
@@ -186,13 +208,13 @@ LIMIT 10
 
 ### 3.5 What are the countries with the highest contribution to carbon emissions?
 ```sql
-ELECT ct.country_name,
+SELECT	ct.country_name,
 	ROUND(SUM(pe.carbon_footprint_pcf),2)
-FROM product_emissions pe 
-JOIN countries ct ON ct.id = pe.country_id
+FROM product_emissions pe JOIN
+     countries ct ON ct.id = pe.country_id
 GROUP BY ct.country_name
 ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
-LIMIT 10
+LIMIT 10;
 ```
 |country_name|ROUND(SUM(pe.carbon_footprint_pcf),2)|
 |------------|-------------------------------------|
@@ -221,8 +243,8 @@ SELECT
 	ROUND(SUM(CASE WHEN pe.year = 2015 THEN pe.carbon_footprint_pcf ELSE 0 END), 2) AS '2015 Emission',
 	ROUND(SUM(CASE WHEN pe.year = 2016 THEN pe.carbon_footprint_pcf ELSE 0 END), 2) AS '2016 Emission',
 	ROUND(SUM(CASE WHEN pe.year = 2017 THEN pe.carbon_footprint_pcf ELSE 0 END), 2) AS '2017 Emission'	
-FROM product_emissions AS pe 
-JOIN industry_groups AS ig ON pe.industry_group_id = ig.id
+FROM product_emissions AS pe JOIN
+     industry_groups AS ig ON pe.industry_group_id = ig.id
 GROUP BY ig.industry_group
 ORDER BY
 	'2017 Emission',
