@@ -299,3 +299,5 @@ ORDER BY
 |Tobacco|0.00|0.00|1.00|0.00|0.00|
 |Trading Companies & Distributors and Commercial Services & Supplies|0.00|0.00|239.00|0.00|0.00|
 |Utilities|122.00|0.00|0.00|122.00|0.00|
+
+* From these figures, it can be found that the industry groups with notable decrease in carbon emission are the Electrical Equipment & Machinery and then the Automobiles & Components.
