@@ -210,14 +210,14 @@ LIMIT 10;
 ### 3.5 What are the countries with the highest contribution to carbon emissions?
 ```sql
 SELECT	ct.country_name,
-	ROUND(SUM(pe.carbon_footprint_pcf),2)
+	ROUND(SUM(pe.carbon_footprint_pcf),2) AS 'Total PCF'
 FROM product_emissions pe JOIN
      countries ct ON ct.id = pe.country_id
 GROUP BY ct.country_name
 ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
 LIMIT 10;
 ```
-|country_name|ROUND(SUM(pe.carbon_footprint_pcf),2)|
+|country_name|AS 'Total PCF'|
 |------------|-------------------------------------|
 |Spain|9786130.00|
 |Germany|2251225.00|
