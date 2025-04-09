@@ -130,8 +130,8 @@ LIMIT 10;
 
 ### 3.2 What are the industry groups of these products?
 ```sql
-SELECT	pe.product_name,
-	ig.industry_group,
+SELECT	ig.industry_group,
+	pe.product_name,
 	ROUND(AVG(pe.carbon_footprint_pcf),2) AS 'Average PCF'
 FROM product_emissions pe JOIN
      industry_groups ig ON pe.industry_group_id = ig.id
@@ -143,18 +143,19 @@ ORDER BY
     pe.carbon_footprint_pcf DESC
 LIMIT 10;
 ```
-|product_name|industry_group|Average PCF|
-|------------|--------------|-----------|
-|Wind Turbine G128 5 Megawats|Electrical Equipment and Machinery|3718044.00|
-|Wind Turbine G132 5 Megawats|Electrical Equipment and Machinery|3276187.00|
-|Wind Turbine G114 2 Megawats|Electrical Equipment and Machinery|1532608.00|
-|Wind Turbine G90 2 Megawats|Electrical Equipment and Machinery|1251625.00|
-|Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.|Automobiles & Components|191687.00|
-|Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall|Materials|167000.00|
-|TCDE|Materials|99075.00|
-|Mercedes-Benz GLE (GLE 500 4MATIC)|Automobiles & Components|91000.00|
-|Mercedes-Benz S-Class (S 500)|Automobiles & Components|85000.00|
-|Mercedes-Benz SL (SL 350)|Automobiles & Components|72000.00|
+|industry_group|product_name|Average PCF|
+|--------------|------------|-----------|
+|Electrical Equipment and Machinery|Wind Turbine G128 5 Megawats|3718044.00|
+|Electrical Equipment and Machinery|Wind Turbine G132 5 Megawats|3276187.00|
+|Electrical Equipment and Machinery|Wind Turbine G114 2 Megawats|1532608.00|
+|Electrical Equipment and Machinery|Wind Turbine G90 2 Megawats|1251625.00|
+|Automobiles & Components|Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.|191687.00|
+|Materials|Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall|167000.00|
+|Materials|TCDE|99075.00|
+|Automobiles & Components|Mercedes-Benz GLE (GLE 500 4MATIC)|91000.00|
+|Automobiles & Components|Mercedes-Benz S-Class (S 500)|85000.00|
+|Automobiles & Components|Mercedes-Benz SL (SL 350)|72000.00|
+
 
 * The industry groups with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
 
