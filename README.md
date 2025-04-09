@@ -126,7 +126,7 @@ LIMIT 10;
 |Mercedes-Benz S-Class (S 500)|85000.00|
 |Mercedes-Benz SL (SL 350)|72000.00|
 
-* The products with high carbon emissions are wind turbines with 2 or 5 megawats and then luxury cars such as Land Cruiser Prado, Dyna trucks, Toyoace.IMV, Mercedes-Benz models GLE, S-Class and SL.
+* The products with high carbon emission are wind turbines with 2 or 5 megawats and then luxury cars such as Land Cruiser Prado, Dyna trucks, Toyoace.IMV, Mercedes-Benz models GLE, S-Class and SL.
 
 ### 3.2 What are the industry groups of these products?
 ```sql
@@ -157,7 +157,7 @@ LIMIT 10;
 |Automobiles & Components|Mercedes-Benz SL (SL 350)|72000.00|
 
 
-* The industry groups with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
+* The industry groups with high carbon emission are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
 
 ### 3.3 What are the industries with the highest contribution to carbon emissions?
 ```sql
@@ -182,7 +182,7 @@ LIMIT 10;
 |Software & Services|46544.00|
 |Media|23017.00|
 
-* The industries with high carbon emissions are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
+* The industries with high carbon emission are mainly coming from Electrical Equipment and Machinery, Automobiles & Components, Materials
 
 ### 3.4 What are the companies with the highest contribution to carbon emissions?
 ```sql
@@ -207,6 +207,8 @@ LIMIT 10;
 |"Lexmark International, Inc."|132012.00|
 |"Daikin Industries, Ltd."|105600.00|
 
+* It can be seen that companies with high carbon emission are coming from automobile-makers such as Diamler AG, Volkswagen AG, Hino Motors, General Motors
+
 ### 3.5 What are the countries with the highest contribution to carbon emissions?
 ```sql
 SELECT	ct.country_name,
@@ -229,6 +231,8 @@ LIMIT 10;
 |Netherlands|70417.00|
 |Taiwan|62875.00|
 |India|24574.00|
+
+* Countries with high carbon emission are spread out all over the world such as Spain, Germany, Japan, USA, South Korea
 
 ### 3.6 What is the trend of carbon footprints (PCFs) over the years?
 ```sql
