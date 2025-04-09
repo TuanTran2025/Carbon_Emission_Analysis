@@ -236,8 +236,17 @@ LIMIT 10;
 
 ### 3.6 What is the trend of carbon footprints (PCFs) over the years?
 ```sql
-
+SELECT
+	ROUND(SUM(CASE WHEN pe.year = 2013 THEN pe.carbon_footprint_pcf ELSE 0 END), 2) AS '2013 Emission',
+	ROUND(SUM(CASE WHEN pe.year = 2014 THEN pe.carbon_footprint_pcf ELSE 0 END), 2) AS '2014 Emission',
+	ROUND(SUM(CASE WHEN pe.year = 2015 THEN pe.carbon_footprint_pcf ELSE 0 END), 2) AS '2015 Emission',
+	ROUND(SUM(CASE WHEN pe.year = 2016 THEN pe.carbon_footprint_pcf ELSE 0 END), 2) AS '2016 Emission',
+	ROUND(SUM(CASE WHEN pe.year = 2017 THEN pe.carbon_footprint_pcf ELSE 0 END), 2) AS '2017 Emission'	
+FROM product_emissions AS pe;
 ```
+|2013 Emission|2014 Emission|2015 Emission|2016 Emission|2017 Emission|
+|-------------|-------------|-------------|-------------|-------------|
+|503857.00|624226.00|10840415.00|1640182.00|340271.00|
 
 ### 3.7 Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
 ```sql
