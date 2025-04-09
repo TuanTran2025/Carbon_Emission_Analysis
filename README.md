@@ -162,14 +162,14 @@ LIMIT 10;
 ### 3.3 What are the industries with the highest contribution to carbon emissions?
 ```sql
 SELECT	ig.industry_group,
-	ROUND(SUM(pe.carbon_footprint_pcf),2)
+	ROUND(SUM(pe.carbon_footprint_pcf),2) AS 'Total PCF'
 FROM product_emissions pe JOIN
      industry_groups ig ON ig.id = pe.industry_group_id
 GROUP BY pe.industry_group_id
 ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
 LIMIT 10;
 ```
-|industry_group|ROUND(SUM(pe.carbon_footprint_pcf),2)|
+|industry_group|AS 'Total PCF'|
 |--------------|-------------------------------------|
 |Electrical Equipment and Machinery|9801558.00|
 |Automobiles & Components|2582264.00|
@@ -187,14 +187,14 @@ LIMIT 10;
 ### 3.4 What are the companies with the highest contribution to carbon emissions?
 ```sql
 SELECT	c.company_name,
-	ROUND(SUM(pe.carbon_footprint_pcf),2)
+	ROUND(SUM(pe.carbon_footprint_pcf),2) AS 'Total PCF'
 FROM product_emissions pe JOIN
      companies c ON c.id = pe.company_id
 GROUP BY c.company_name
 ORDER BY ROUND(SUM(pe.carbon_footprint_pcf),2) DESC
 LIMIT 10;
 ```
-|company_name|ROUND(SUM(pe.carbon_footprint_pcf),2)|
+|company_name|AS 'Total PCF'|
 |------------|-------------------------------------|
 |"Gamesa Corporación Tecnológica, S.A."|9778464.00|
 |Daimler AG|1594300.00|
